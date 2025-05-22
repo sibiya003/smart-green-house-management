@@ -1,0 +1,34 @@
+🌿 Smart Greenhouse Sensor Dataset Structure
+Timestamp	Temperature (°C)	Humidity (%)	Soil Moisture (%)	Light Intensity (Raw)	Irrigation Status
+2025-05-22 10:00:00	28.5	60.2	35.6	645	ON
+2025-05-22 10:00:02	28.6	60.3	35.9	650	ON
+2025-05-22 10:00:04	28.7	60.5	41.2	655	OFF
+...	...	...	...	...	...
+
+📊 Field Descriptions
+Field	Description
+Timestamp	Time when the readings were recorded (can be added via RTC or external logger)
+Temperature (°C)	Ambient temperature from the DHT22 sensor
+Humidity (%)	Relative humidity from the DHT22 sensor
+Soil Moisture (%)	Calculated from analog input (mapped from raw value 1023–0 to 0–100%)
+Light Intensity	Raw analog value from light sensor (e.g., 0–1023, higher = brighter)
+Irrigation Status	ON if soil moisture < 40%, otherwise OFF
+
+🧪 Sample Data Logging Code (Optional Extension)
+To store this dataset on an SD card or print it in CSV format:
+
+Serial.print(temperature); Serial.print(",");
+Serial.print(humidity); Serial.print(",");
+Serial.print(moisturePercentage); Serial.print(",");
+Serial.print(lightIntensity); Serial.print(",");
+Serial.println(digitalRead(RELAYPIN) == HIGH ? "ON" : "OFF");
+Or add a real-time clock (RTC) module (like DS3231) to log timestamps.
+
+🔧 Use Cases for the Dataset
+Graphing trends (moisture vs time, temperature vs humidity)
+
+Trigger analysis (what conditions turn irrigation on/off)
+
+Optimizing watering schedules based on moisture and sunlight
+
+Machine Learning inputs for predictive control
